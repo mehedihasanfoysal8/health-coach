@@ -21,7 +21,7 @@ const WhyHealthCoach = () => {
                 <h2 className="text-[#185F9D] text-2xl my-6">
                     Why Health Coach?
                 </h2>
-                <p className="font-extrabold text-3xl tracking-[1px] leading-[40px] md:text-[40px] md:pr-16">
+                <p className="font-extrabold text-3xl tracking-[1px] leading-[40px] md:leading-[57px] md:text-[40px] md:pr-16">
                     Bangladesh’s leading healthcare platform for online doctor
                     consultation and personalized health management.
                 </p>
