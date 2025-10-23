@@ -56,13 +56,13 @@ export default function DepressionTest() {
     return (
         <section>
             <div className="bg-[#E3F8F8] py-12">
-                <h1 className="max-w-7xl mx-auto px-6 text-3xl sm:text-4xl font-semibold text-[#237591]">
+                <h1 className="max-w-7xl mx-auto px-4 text-3xl sm:text-4xl font-semibold text-[#237591]">
                     Take a Free Online Depression Test
                 </h1>
             </div>
 
             <div className="max-w-7xl mx-auto">
-                <div className="pl-6 pr-8 py-16 rounded-2xl space-y-6">
+                <div className="px-4 py-16 rounded-2xl space-y-6">
                     {questions.map((q, i) => {
                         const isLocked = i > 0 && answers[i - 1] === null;
                         return (
@@ -109,13 +109,13 @@ export default function DepressionTest() {
                         );
                     })}
 
-                    <div className="mt-12 flex justify-between w-[500px] mx-auto gap-3 pr-7 sm:pr-0">
+                    <div className="mt-12 flex justify-between sm:w-[500px] mx-auto gap-3 sm:pr-7 pr-3">
 
 
                         <Button
                             onClick={calculateScore}
                             disabled={!allAnswered}
-                            className={`w-[70%] py-6 rounded-lg font-semibold text-white ${allAnswered
+                            className={`w-[70%] py-6 rounded font-semibold text-white ${allAnswered
                                 ? "bg-[#237591] hover:bg-[#185F9D]"
                                 : "bg-gray-400 cursor-not-allowed"
                                 }`}
@@ -127,7 +127,7 @@ export default function DepressionTest() {
                             type="button"
                             variant={"outline"}
                             onClick={handleReset}
-                            className="w-[30%] px-8 py-6 rounded-lg border font-semibold bg-red-500 hover:bg-red-600 text-white hover:text-white"
+                            className="w-[30%] px-8 py-6 rounded border font-semibold bg-red-500 hover:bg-red-600 text-white hover:text-white"
                         >
                             Reset
                         </Button>

@@ -31,7 +31,7 @@ export default function AnxietyDisorderTest() {
   };
 
   const calculateScore = () => {
-    const total = answers.reduce((sum : number, val) => sum + (val ?? 0), 0);
+    const total = answers.reduce((sum: number, val) => sum + (val ?? 0), 0);
     setScore(total);
     setShowModal(true);
   };
@@ -59,15 +59,14 @@ export default function AnxietyDisorderTest() {
       </div>
 
       <div className="max-w-7xl mx-auto">
-        <div className="pl-6 pr-8 py-16 rounded-2xl space-y-6">
+        <div className="px-6 py-16 rounded-2xl space-y-6">
           {questions.map((q, i) => {
             const isLocked = i > 0 && answers[i - 1] === null;
             return (
               <div
                 key={i}
-                className={`${i == 6 ? "border-b-0" : "border-b"} pb-4 mb-4 transition-all duration-300 ${
-                  isLocked ? "opacity-50 pointer-events-none" : ""
-                }`}
+                className={`${i == 6 ? "border-b-0" : "border-b"} pb-4 mb-4 transition-all duration-300 ${isLocked ? "opacity-50 pointer-events-none" : ""
+                  }`}
               >
                 <p className="font-medium text-xl mb-4 mt-3">
                   {i + 1}. {q}
@@ -77,11 +76,10 @@ export default function AnxietyDisorderTest() {
                   {[0, 1, 2, 3].map((val) => (
                     <label
                       key={val}
-                      className={`cursor-pointer text-center border-2 rounded px-4 py-2 text-sm font-medium transition-all ${
-                        answers[i] === val
+                      className={`cursor-pointer text-center border-2 rounded px-4 py-2 text-sm font-medium transition-all ${answers[i] === val
                           ? "bg-[#185F9D] text-white border-[#185F9D]"
                           : "border-gray-300 text-gray-700 hover:border-[#185F9D]"
-                      }`}
+                        }`}
                     >
                       <input
                         type="radio"
@@ -94,10 +92,10 @@ export default function AnxietyDisorderTest() {
                       {val === 0
                         ? "Not at all"
                         : val === 1
-                        ? "Several days"
-                        : val === 2
-                        ? "More than half"
-                        : "Nearly every day"}
+                          ? "Several days"
+                          : val === 2
+                            ? "More than half"
+                            : "Nearly every day"}
                     </label>
                   ))}
                 </div>
@@ -105,13 +103,12 @@ export default function AnxietyDisorderTest() {
             );
           })}
 
-          <div className="mt-12 flex justify-between w-[500px] mx-auto gap-3 pr-7 sm:pr-0">
+          <div className="mt-12 flex justify-between sm:w-[500px] mx-auto gap-3 sm:pr-7 pr-3">
             <Button
               onClick={calculateScore}
               disabled={!allAnswered}
-              className={`w-[70%] py-6 rounded-lg font-semibold text-white ${
-                allAnswered ? "bg-[#237591] hover:bg-[#185F9D]" : "bg-gray-400 cursor-not-allowed"
-              }`}
+              className={`w-[70%] py-6 rounded font-semibold text-white ${allAnswered ? "bg-[#237591] hover:bg-[#185F9D]" : "bg-gray-400 cursor-not-allowed"
+                }`}
             >
               Submit & Get Result
             </Button>
@@ -120,7 +117,7 @@ export default function AnxietyDisorderTest() {
               type="button"
               variant={"outline"}
               onClick={handleReset}
-              className="w-[30%] px-8 py-6 rounded-lg border font-semibold bg-red-500 hover:bg-red-600 text-white hover:text-white"
+              className="w-[30%] px-8 py-6 rounded border font-semibold bg-red-500 hover:bg-red-600 text-white hover:text-white"
             >
               Reset
             </Button>
@@ -168,23 +165,23 @@ export default function AnxietyDisorderTest() {
               </div>
             </details>
 
-             <details className="mt-6 sm:mt-8">
-                            <summary className="cursor-pointer font-medium text-sm sm:text-base">
-                                Sources              </summary>
-                            <div className="mt-2 text-gray-700 text-xs sm:text-sm">
-                                <ul className="list-disc pl-5 sm:pl-6 space-y-1">
+            <details className="mt-6 sm:mt-8">
+              <summary className="cursor-pointer font-medium text-sm sm:text-base">
+                Sources              </summary>
+              <div className="mt-2 text-gray-700 text-xs sm:text-sm">
+                <ul className="list-disc pl-5 sm:pl-6 space-y-1">
 
-                                    <li>
-Spitzer RL, Kroenke K, Williams JB, Löwe B. A brief measure for assessing generalized anxiety disorder: the GAD-7. Arch Intern Med. 2006;166:1092-7.
-                                    </li>
-                                    <li>
-Plummer F, Manea L, Trepel D, McMillan D. Screening for anxiety disorders with the GAD-7 and GAD-2: a systematic review and diagnostic metaanalysis. Gen Hosp Psychiatry. 2016;39:24-31.                                    </li>
-                                    <li>
-Kroenke K, Spitzer RL, Williams JB, Monahan PO, Löwe B. Anxiety disorders in primary care: prevalence, impairment, comorbidity, and detection. Ann Intern Med. 2007;146:317-25.                                    </li>
+                  <li>
+                    Spitzer RL, Kroenke K, Williams JB, Löwe B. A brief measure for assessing generalized anxiety disorder: the GAD-7. Arch Intern Med. 2006;166:1092-7.
+                  </li>
+                  <li>
+                    Plummer F, Manea L, Trepel D, McMillan D. Screening for anxiety disorders with the GAD-7 and GAD-2: a systematic review and diagnostic metaanalysis. Gen Hosp Psychiatry. 2016;39:24-31.                                    </li>
+                  <li>
+                    Kroenke K, Spitzer RL, Williams JB, Monahan PO, Löwe B. Anxiety disorders in primary care: prevalence, impairment, comorbidity, and detection. Ann Intern Med. 2007;146:317-25.                                    </li>
 
-                                </ul>
-                            </div>
-                        </details>
+                </ul>
+              </div>
+            </details>
 
             <div className="mt-6 sm:mt-8 text-center sm:text-right">
               <button

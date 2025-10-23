@@ -92,7 +92,7 @@ export default function AlcoholUseTest() {
             </div>
 
             <div className="max-w-7xl mx-auto">
-                <div className="pl-6 pr-8 py-16 rounded-2xl space-y-6">
+                <div className="px-4 sm:px-6 py-16 rounded-2xl space-y-6">
                     {/* Gender Selection */}
                     <div className="mb-8">
                         <p className="text-lg font-medium mb-2">Please select your gender:</p>
@@ -102,8 +102,8 @@ export default function AlcoholUseTest() {
                                     key={g}
                                     onClick={() => setGender(g as "male" | "female")}
                                     className={`px-6 py-2 border-2 rounded-lg font-medium capitalize transition-all ${gender === g
-                                            ? "bg-[#185F9D] text-white border-[#185F9D]"
-                                            : "border-gray-300 hover:border-[#185F9D]"
+                                        ? "bg-[#185F9D] text-white border-[#185F9D]"
+                                        : "border-gray-300 hover:border-[#185F9D]"
                                         }`}
                                 >
                                     {g}
@@ -128,8 +128,8 @@ export default function AlcoholUseTest() {
                                         <label
                                             key={opt.value}
                                             className={`cursor-pointer text-center border-2 rounded px-4 py-2 text-sm font-medium transition-all ${answers[i] === opt.value
-                                                    ? "bg-[#185F9D] text-white border-[#185F9D]"
-                                                    : "border-gray-300 text-gray-700 hover:border-[#185F9D]"
+                                                ? "bg-[#185F9D] text-white border-[#185F9D]"
+                                                : "border-gray-300 text-gray-700 hover:border-[#185F9D]"
                                                 }`}
                                         >
                                             <input
@@ -149,13 +149,13 @@ export default function AlcoholUseTest() {
                     })}
 
                     {/* Buttons */}
-                    <div className="mt-12 flex justify-between w-[500px] mx-auto gap-3 pr-7 sm:pr-0">
+                    <div className="mt-12 flex justify-between sm:w-[500px] mx-auto gap-3 sm:pr-7 pr-3">
                         <Button
                             onClick={calculateScore}
                             disabled={!allAnswered || !gender}
-                            className={`w-[70%] py-6 rounded-lg font-semibold text-white ${allAnswered && gender
-                                    ? "bg-[#237591] hover:bg-[#185F9D]"
-                                    : "bg-gray-400 cursor-not-allowed"
+                            className={`w-[70%] py-6 rounded font-semibold text-white ${allAnswered && gender
+                                ? "bg-[#237591] hover:bg-[#185F9D]"
+                                : "bg-gray-400 cursor-not-allowed"
                                 }`}
                         >
                             Submit & Get Result
@@ -165,7 +165,7 @@ export default function AlcoholUseTest() {
                             type="button"
                             variant={"outline"}
                             onClick={handleReset}
-                            className="w-[30%] px-8 py-6 rounded-lg border font-semibold bg-red-500 hover:bg-red-600 text-white hover:text-white"
+                            className="w-[30%] px-8 py-6 rounded border font-semibold bg-red-500 hover:bg-red-600 text-white hover:text-white"
                         >
                             Reset
                         </Button>
@@ -193,9 +193,9 @@ export default function AlcoholUseTest() {
                                     <mark className="bg-blue-100 px-2 rounded">{result.label}</mark>
                                 </p>
                                 <p className="mt-2 text-gray-700 text-sm sm:text-base text-center leading-relaxed">
-                                  <mark>
-                                     {result.note}
-                                    </mark> 
+                                    <mark>
+                                        {result.note}
+                                    </mark>
                                 </p>
                             </>
                         )}

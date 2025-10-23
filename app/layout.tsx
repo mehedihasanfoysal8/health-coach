@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} font-sans antialiased pt-[190px]`}>
+      <body suppressHydrationWarning className={`${poppins.variable} font-sans antialiased pt-[190px]`}>
         <Navbar />
         {children}
         <Footer />

@@ -6,21 +6,21 @@ import React from "react";
 const Footer = () => {
   return (
     <footer className="bg-[#0D2137] text-gray-300">
-      <div className="container mx-auto px-6 md:px-10 xl:px-0">
-        <div className="max-w-7xl mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 md:px-10 xl:px-0">
+        <div className="max-w-7xl sm:px-6 mx-auto py-16">
           {/* GRID LAYOUT */}
           <div className="xl:grid xl:grid-cols-3 xl:gap-8">
             {/* Left Section */}
             <div className="space-y-4">
               {/* Logo */}
-              <Link href="/" className="flex items-center space-x-3 text-2xl font-semibold text-white">
-                <div className="w-[120px] h-[70px]">
+              <Link href="/" className="flex items-center justify-start space-x-3 text-2xl font-semibold text-white">
+                <div className="w-[90px] h-[70px]">
                   <Image
                     src="/logo.png"
                     alt="Health Coach Logo"
                     width={120}
                     height={70}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-center rounded"
                     priority
                   />
                 </div>
