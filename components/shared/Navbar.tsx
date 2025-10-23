@@ -10,9 +10,9 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", href: "/" },
-    { name: "Company", href: "/company" },
-    { name: "Marketplace", href: "/marketplace" },
-    { name: "Features", href: "/features" },
+    { name: "Online Depression Test", href: "/depression-test" },
+    { name: "Online Anxiety Test", href: "/anxiety-test" },
+    { name: "Online Alcohol Use Test", href: "/alcohol-use-test" },
     { name: "Team", href: "/team" },
     { name: "Contact", href: "/contact" }
   ];
