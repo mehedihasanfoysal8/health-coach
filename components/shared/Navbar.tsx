@@ -1,11 +1,13 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "../ui/input-group";
 import { SearchIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+
+const LS_EMAIL_KEY = "demo_email";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,8 +18,7 @@ const Navbar = () => {
     { name: "Online Depression Test", href: "/depression-test" },
     { name: "Online Anxiety Test", href: "/anxiety-test" },
     { name: "Online Alcohol Use Test", href: "/alcohol-use-test" },
-    { name: "Team", href: "/team" },
-    { name: "Contact", href: "/contact" },
+    { name: "Consultation", href: "/consultation" }
   ];
 
   // Lock/unlock background scroll when the drawer is open
@@ -32,9 +33,33 @@ const Navbar = () => {
     };
   }, [menuOpen]);
 
+
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Close menu if click outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const [email, setEmail] = useState<string | null>(null);
+
+  useEffect(() => {
+    // ✅ This runs only on the client
+    const stored = localStorage.getItem(LS_EMAIL_KEY);
+    if (stored) setEmail(stored);
+  }, []);
+
+
   return (
     <nav className="bg-[#FCFCFC] dark:bg-gray-900 fixed top-0 left-0 w-full z-50">
-      <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between ">
         {/* Logo */}
         <Link href="/" className="flex items-center w-[110] h-[60] sm:w-[120px] sm:h-[70px]">
           <Image
@@ -49,12 +74,74 @@ const Navbar = () => {
 
         {/* Buttons */}
         <div className="flex items-center lg:order-2">
-          <Link
-            href="/login"
-            className="text-white bg-[#185F9D] hover:bg-[#185F9D] font-bold text-base rounded px-6 sm:px-8 py-2 sm:py-3 mr-2"
-          >
-            Login
-          </Link>
+          {
+            email ?
+
+              <div className="ml-3 relative hidden md:block" ref={menuRef}>
+                {/* Avatar button */}
+                <button
+                  type="button"
+                  onClick={() => setOpen((prev) => !prev)}
+                  className="bg-gray-800 cursor-pointer flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 mr-2 focus:ring-offset-gray-800 focus:ring-white"
+                  id="user-menu-button"
+                  aria-expanded={open}
+                  aria-haspopup="true"
+                >
+                  <span className="sr-only">Open user menu</span>
+                  <Image
+                    width={32}
+                    height={32}
+                    className="size-9 rounded-full"
+                    src='https://img.freepik.com/free-photo/female-doctor-hospital-with-stethoscope_23-2148827774.jpg?semt=ais_hybrid&w=740&q=80' alt="User avatar"
+                  />
+                </button>
+
+                {/* Dropdown menu */}
+                {open && (
+                  <div
+                    className="origin-top-right z-50 border absolute right-0 p-2 mt-2 w-48 rounded-md shadow-lg bg-white focus:outline-none"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="user-menu-button"
+                  >
+                    <Link
+                      onClick={() => setOpen(false)}
+                      href="/dashboard"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      role="menuitem"
+                    >
+                      Your Profile
+                    </Link>
+                    <Link
+                      href="#"
+                      onClick={() => setOpen(false)}
+
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      role="menuitem"
+                    >
+                      Settings
+                    </Link>
+                    <button
+                      onClick={() => {
+                        localStorage.removeItem("demo_email");
+                        window.location.href = "/login";
+                      }}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      role="menuitem"
+                    >
+                      Sign out
+                    </button>
+                  </div>
+                )}
+              </div>
+              :
+              <Link
+                href="/login"
+                className="text-white bg-[#185F9D] hover:bg-[#185F9D] font-bold text-base rounded px-6 sm:px-8 py-2 sm:py-3 mr-2"
+              >
+                Login
+              </Link>
+          }
 
           {/* Mobile Menu Button */}
           <button
@@ -134,17 +221,22 @@ const Navbar = () => {
 
       <hr className="border" />
 
-      <div className="px-4 sm:px-10 md:px-20 lg:px-28 my-5 md:max-w-7xl mx-auto">
-        <InputGroup className="py-6 sm:py-5 md:py-6 lg:py-7 px-3 rounded shadow-sm border border-gray-200 dark:border-gray-700 !focus-within:border-[#185F9D] transition-colors duration-300">
-          <InputGroupInput
-            placeholder="Search doctor, code, or department"
-            className="text-sm sm:text-base md:text-lg focus-visible:ring-0 focus-visible:ring-offset-0 !focus-visible:border-[#185F9D] placeholder:text-gray-500 placeholder:text-xs sm:placeholder:text-sm md:placeholder:text-base"
-          />
-          <InputGroupAddon align="inline-end">
-            <SearchIcon className="w-5 h-5 text-gray-500 hover:text-[#185F9D] transition-colors duration-200" />
-          </InputGroupAddon>
-        </InputGroup>
-      </div>
+      {
+        pathname !== "/login" && pathname !== "/dashboard" &&
+
+        <div className="px-4 sm:px-10 md:px-20 lg:px-28 my-5 md:max-w-7xl mx-auto">
+          <InputGroup className="py-6 sm:py-5 md:py-6 lg:py-7 px-3 rounded shadow-sm border border-gray-200 dark:border-gray-700 !focus-within:border-[#185F9D] transition-colors duration-300">
+            <InputGroupInput
+              placeholder="Search doctor, code, or department"
+              className="text-sm sm:text-base md:text-lg focus:!border-red-400 appearance-auto focus:!outline-none focus:!ring-0 focus:border-transparent! placeholder:text-gray-500 placeholder:text-xs sm:placeholder:text-sm md:placeholder:text-base"
+            />
+
+            <InputGroupAddon align="inline-end">
+              <SearchIcon className="size-6 text-gray-500 hover:text-[#185F9D] transition-colors duration-200" />
+            </InputGroupAddon>
+          </InputGroup>
+        </div>
+      }
     </nav>
   );
 };
