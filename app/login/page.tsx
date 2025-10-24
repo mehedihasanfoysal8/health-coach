@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 const LS_EMAIL_KEY = "demo_email";
 

@@ -1,17 +1,19 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "../ui/input-group";
 import { SearchIcon } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
-
-const LS_EMAIL_KEY = "demo_email";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+    const router = useRouter(); // <-- 2. Initialize router
+
+    const [searchTerm, setSearchTerm] = useState(""); // <-- 2. Create state
+
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -52,9 +54,26 @@ const Navbar = () => {
 
   useEffect(() => {
     // ✅ This runs only on the client
-    const stored = localStorage.getItem(LS_EMAIL_KEY);
+    const stored = localStorage.getItem("demo_email");
     if (stored) setEmail(stored);
   }, []);
+
+    // 3. Add a useEffect to watch for changes in searchTerm
+  useEffect(() => {
+    // Set a timer for 500ms
+    const timer = setTimeout(() => {
+      if (searchTerm.trim() !== "") {
+        // We use router.replace() here so it doesn't fill up the browser history
+        // with every letter typed.
+        router.replace(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
+      }
+    }, 500); // 500ms delay
+
+    // This cleanup function runs if the user types again before 500ms
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchTerm, router]); // Re-run this effect when searchTerm or router changes
 
 
   return (
@@ -77,7 +96,7 @@ const Navbar = () => {
           {
             email ?
 
-              <div className="ml-3 relative hidden md:block" ref={menuRef}>
+              <div className="ml-3 relative" ref={menuRef}>
                 {/* Avatar button */}
                 <button
                   type="button"
@@ -227,8 +246,9 @@ const Navbar = () => {
         <div className="px-4 sm:px-10 md:px-20 lg:px-28 my-5 md:max-w-7xl mx-auto">
           <InputGroup className="py-6 sm:py-5 md:py-6 lg:py-7 px-3 rounded shadow-sm border border-gray-200 dark:border-gray-700 !focus-within:border-[#185F9D] transition-colors duration-300">
             <InputGroupInput
+             onChange={(e) => setSearchTerm(e.target.value)} // <-- Update state
               placeholder="Search doctor, code, or department"
-              className="text-sm sm:text-base md:text-lg focus:!border-red-400 appearance-auto focus:!outline-none focus:!ring-0 focus:border-transparent! placeholder:text-gray-500 placeholder:text-xs sm:placeholder:text-sm md:placeholder:text-base"
+              className="text-sm sm:text-base md:text-lg appearance-auto focus:!outline-none focus:!ring-0 focus:border-transparent! placeholder:text-gray-500 placeholder:text-xs sm:placeholder:text-sm md:placeholder:text-base"
             />
 
             <InputGroupAddon align="inline-end">

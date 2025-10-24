@@ -1,4 +1,5 @@
 "use client";
+
 import { LS_APPTS_KEY } from "@/components/shared/DoctorCard";
 import { Button } from "@/components/ui/button";
 import { Doctor } from "@/lib/type";
@@ -106,21 +107,43 @@ export default function DepressionTest() {
       .sort((a, b) => rank(a.specialty) - rank(b.specialty));
   }, [result, doctors]);
 
+  
+  const LS_EMAIL_KEY = "demo_email";
+
+
   /* ------------ Local appointment storage ------------- */
-  const book = (doc: Doctor) => {
-    const appt = {
-      id: crypto.randomUUID(),
-      doctorId: doc.id,
-      doctorName: doc.name,
-      specialty: doc.specialty,
-      price: doc.price,
-      bookedAt: new Date().toISOString()
-    };
-    const prev = JSON.parse(localStorage.getItem(LS_APPTS_KEY) || "[]");
-    localStorage.setItem(LS_APPTS_KEY, JSON.stringify([appt, ...prev]));
-    alert("Appointment booked!");
-    router.push("/dashboard");
+
+ const book = (doc: Doctor) => {
+  // ✅ Safe check for browser-side
+  if (typeof window === "undefined") return;
+
+  const userEmail = localStorage.getItem(LS_EMAIL_KEY);
+
+  // 🚫 Not logged in → redirect to login
+  if (!userEmail) {
+    alert("Please login first to book an appointment.");
+    router.push("/login");
+    return;
+  }
+
+  // ✅ Logged in → proceed with booking
+  const appt = {
+    id: crypto.randomUUID(),
+    doctorId: doc.id,
+    doctorName: doc.name,
+    specialty: doc.specialty,
+    price: doc.price,
+    bookedAt: new Date().toISOString(),
+    bookedBy: userEmail
   };
+
+  const prev = JSON.parse(localStorage.getItem(LS_APPTS_KEY) || "[]");
+  localStorage.setItem(LS_APPTS_KEY, JSON.stringify([appt, ...prev]));
+
+  alert(`Appointment booked successfully for ${doc.name}`);
+  router.push("/dashboard");
+};
+
 
 
   return (

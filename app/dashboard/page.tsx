@@ -13,9 +13,18 @@ export default function DashboardPage() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const e = localStorage.getItem(LS_EMAIL_KEY);
     if (e) setEmail(e);
+    // ✅ Safe check for browser-side
 
+    // 🚫 Not logged in → redirect to login
+    if (!e) {
+      alert("Please login first to book an appointment.");
+      router.push("/login");
+      return;
+    }
     try {
       const arr = JSON.parse(localStorage.getItem(LS_APPTS_KEY) || "[]") as Appointment[];
       setHistory(arr);
@@ -23,7 +32,7 @@ export default function DashboardPage() {
       setHistory([]);
     }
     setLoaded(true);
-  }, []);
+  }, [router]);
 
   const clearHistory = () => {
     localStorage.removeItem(LS_APPTS_KEY);
@@ -57,21 +66,12 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <header className="border-b">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <div className="bg-white -mt-20 pb-12">
+      <header className="border-b mb-5">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center flex-col gap-2 justify-between mb-5">
           <h1 className="text-xl font-semibold">Dashboard</h1>
           <div className="flex items-center gap-3">
-            {email && <span className="text-sm text-gray-600">Signed in as <b>{email}</b></span>}
-            <button
-              onClick={() => {
-                localStorage.removeItem(LS_EMAIL_KEY);
-                router.replace("/login");
-              }}
-              className="text-sm px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200"
-            >
-              Logout
-            </button>
+            {email && <span className="text-sm text-gray-600">Welcome to <mark>{email}</mark></span>}
           </div>
         </div>
       </header>
