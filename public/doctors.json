@@ -23,7 +23,7 @@
     "rating": 4.9,
     "reviews": 412,
     "experienceYears": 12,
-    "tags": ["Online Appointment"]
+    "tags": ["Online Appointment", "Instant Video Call"]
   },
   {
     "id": "psy-3",
@@ -36,7 +36,7 @@
     "rating": 4.8,
     "reviews": 200,
     "experienceYears": 10,
-    "tags": ["Online Appointment", "Follow-up Available"]
+    "tags": ["Online Appointment", "Instant Video Call"]
   },
   {
     "id": "psy-4",
@@ -49,7 +49,7 @@
     "rating": 4.7,
     "reviews": 168,
     "experienceYears": 9,
-    "tags": ["Instant Video Call"]
+    "tags": ["Online Appointment", "Instant Video Call"]
   },
   {
     "id": "psy-5",
@@ -62,7 +62,7 @@
     "rating": 4.8,
     "reviews": 305,
     "experienceYears": 14,
-    "tags": ["Online Appointment"]
+    "tags": ["Online Appointment", "Instant Video Call"]
   },
 
   {
@@ -76,7 +76,7 @@
     "rating": 4.9,
     "reviews": 510,
     "experienceYears": 11,
-    "tags": ["Cognitive Behavioral Therapy", "Online Appointment"]
+    "tags": ["Online Appointment", "Instant Video Call"]
   },
   {
     "id": "cp-2",
@@ -89,7 +89,7 @@
     "rating": 4.7,
     "reviews": 220,
     "experienceYears": 8,
-    "tags": ["CBT", "Online Appointment"]
+    "tags": ["Online Appointment", "Instant Video Call"]
   },
   {
     "id": "cp-3",
@@ -102,7 +102,7 @@
     "rating": 4.8,
     "reviews": 330,
     "experienceYears": 9,
-    "tags": ["Family Therapy", "Online Appointment"]
+    "tags": ["Online Appointment", "Instant Video Call"]
   },
   {
     "id": "cp-4",
@@ -115,7 +115,7 @@
     "rating": 4.9,
     "reviews": 410,
     "experienceYears": 13,
-    "tags": ["Behavioral Activation"]
+    "tags": ["Online Appointment", "Instant Video Call"]
   },
 
   {
@@ -129,7 +129,7 @@
     "rating": 4.6,
     "reviews": 160,
     "experienceYears": 7,
-    "tags": ["Online Appointment"]
+    "tags": ["Online Appointment", "Instant Video Call"]
   },
   {
     "id": "csl-2",
@@ -142,7 +142,7 @@
     "rating": 4.7,
     "reviews": 135,
     "experienceYears": 6,
-    "tags": ["Career Counseling", "Online Appointment"]
+    "tags": ["Online Appointment", "Instant Video Call"]
   },
   {
     "id": "csl-3",
@@ -155,7 +155,7 @@
     "rating": 4.5,
     "reviews": 102,
     "experienceYears": 5,
-    "tags": ["Relationship Counseling"]
+    "tags": ["Online Appointment", "Instant Video Call"]
   },
 
   {
@@ -169,7 +169,7 @@
     "rating": 4.7,
     "reviews": 210,
     "experienceYears": 10,
-    "tags": ["Online Appointment"]
+    "tags": ["Online Appointment", "Instant Video Call"]
   },
   {
     "id": "add-2",
@@ -182,7 +182,7 @@
     "rating": 4.6,
     "reviews": 145,
     "experienceYears": 8,
-    "tags": ["Relapse Prevention"]
+    "tags": ["Online Appointment", "Instant Video Call"]
   },
   {
     "id": "add-3",
@@ -195,6 +195,6 @@
     "rating": 4.8,
     "reviews": 172,
     "experienceYears": 9,
-    "tags": ["Online Appointment", "Group Therapy"]
+    "tags": ["Online Appointment", "Instant Video Call"]
   }
 ]
