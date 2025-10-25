@@ -6,7 +6,7 @@ const WhyHealthCoach = () => {
     return (
         <section className="bg-[#FEFEFE] mb-20 px-4">
 
-            <div className="max-w-screen-xl mx-auto">
+            <div className="max-w-7xl mx-auto">
                 <div className="md:w-[650px] md:h-[500px]">
                     <Image
                         src="https://doctime.com.bd/images/why-doctime/Why_DocTime.webp"

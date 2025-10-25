@@ -144,7 +144,7 @@ export default function ConsultationPage() {
 
     return (
         <div>
-            <section className="flex items-center justify-center w-full h-[200px] sm:h-[300px] md:h-[300px] relative overflow-hidden">
+            <section className="flex items-center justify-center w-full h-[200px] sm:h-[300px] md:h-[300px] xl:h-[480px] relative overflow-hidden">
                 <Image
                     src='https://doctime-core-ap-southeast-1.s3.ap-southeast-1.amazonaws.com/images/banners/874/Nk1YQkXxkc6S8rinWTVOEclNwGi8qGqh4AjlY2or.jpg' alt="images"
                     fill

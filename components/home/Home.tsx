@@ -1,3 +1,4 @@
+import Become from "./Become"
 import HeroSection from "./HeroSection"
 import ItemsSection from "./Items"
 import StatsSection from "./StatsSection"
@@ -11,6 +12,7 @@ const HomePage = () => {
             <ItemsSection/>
             <StatsSection/>
             <WhyHealthCoach/>
+            <Become/>
         </div>
     )
 }
