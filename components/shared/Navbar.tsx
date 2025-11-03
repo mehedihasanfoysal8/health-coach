@@ -24,7 +24,7 @@ const Navbar = () => {
     { name: "Online Anxiety Test", href: "/anxiety-test" },
     { name: "Online Alcohol Use Test", href: "/alcohol-use-test" },
     { name: "Consultation", href: "/consultation" },
-    { name: "Relex your self", href: "/Relex your self" }
+    { name: "Relax yourself", href: "/relax-session" }
   ];
 
   // Lock/unlock background scroll when the drawer is open
