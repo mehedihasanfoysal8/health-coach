@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
-const LS_EMAIL_KEY = "demo_email";
+import { useLocalAuth } from "@/hooks/loginHook";
 
 export default function LoginPage() {
     const router = useRouter();
+    const { login } = useLocalAuth();           // ← use the hook
+
     const [email, setEmail] = useState("");
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [password, setPassword] = useState("");
@@ -19,7 +20,7 @@ export default function LoginPage() {
         // No API — just stash email locally and go to dashboard
         setSubmitting(true);
         try {
-            localStorage.setItem(LS_EMAIL_KEY, email.trim());
+            login(email);                            // ← sets LS + notifies navbar
             router.push("/dashboard");
         } finally {
             setSubmitting(false);

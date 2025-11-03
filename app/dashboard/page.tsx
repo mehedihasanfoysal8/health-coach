@@ -87,7 +87,7 @@ export default function DashboardPage() {
           </div>
         ) : (
           <div className="rounded-xl border p-6 text-gray-600">
-            No appointments yet. <a href="/doctors" className="text-blue-600 underline">Browse doctors</a>.
+            No appointments yet. <a href="/consultation" className="text-blue-600 underline">Browse doctors</a>.
           </div>
         )}
 

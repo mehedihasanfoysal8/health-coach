@@ -6,13 +6,16 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from "../ui/input-group"
 import { SearchIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
+import { useLocalAuth } from "@/hooks/loginHook";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
-    const router = useRouter(); // <-- 2. Initialize router
+  const router = useRouter(); // <-- 2. Initialize router
+  const { email, logout } = useLocalAuth();   // ← live auth state
 
-    const [searchTerm, setSearchTerm] = useState(""); // <-- 2. Create state
+
+  const [searchTerm, setSearchTerm] = useState(""); // <-- 2. Create state
 
 
   const navItems = [
@@ -20,7 +23,8 @@ const Navbar = () => {
     { name: "Online Depression Test", href: "/depression-test" },
     { name: "Online Anxiety Test", href: "/anxiety-test" },
     { name: "Online Alcohol Use Test", href: "/alcohol-use-test" },
-    { name: "Consultation", href: "/consultation" }
+    { name: "Consultation", href: "/consultation" },
+    { name: "Relex your self", href: "/Relex your self" }
   ];
 
   // Lock/unlock background scroll when the drawer is open
@@ -50,15 +54,8 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const [email, setEmail] = useState<string | null>(null);
 
-  useEffect(() => {
-    // ✅ This runs only on the client
-    const stored = localStorage.getItem("demo_email");
-    if (stored) setEmail(stored);
-  }, []);
-
-    // 3. Add a useEffect to watch for changes in searchTerm
+  // 3. Add a useEffect to watch for changes in searchTerm
   useEffect(() => {
     // Set a timer for 500ms
     const timer = setTimeout(() => {
@@ -142,8 +139,8 @@ const Navbar = () => {
                     </Link>
                     <button
                       onClick={() => {
-                        localStorage.removeItem("demo_email");
-                        window.location.href = "/login";
+                        setOpen(false);
+                        logout();                      // ← clears LS + updates everywhere
                       }}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       role="menuitem"
@@ -246,7 +243,7 @@ const Navbar = () => {
         <div className="px-4 sm:px-10 md:px-20 lg:px-28 my-5 md:max-w-7xl mx-auto">
           <InputGroup className="py-6 sm:py-5 md:py-6 lg:py-7 px-3 rounded shadow-sm border border-gray-200 dark:border-gray-700 !focus-within:border-[#185F9D] transition-colors duration-300">
             <InputGroupInput
-             onChange={(e) => setSearchTerm(e.target.value)} // <-- Update state
+              onChange={(e) => setSearchTerm(e.target.value)} // <-- Update state
               placeholder="Search doctor, code, or department"
               className="text-sm sm:text-base md:text-lg appearance-auto focus:!outline-none focus:!ring-0 focus:border-transparent! placeholder:text-gray-500 placeholder:text-xs sm:placeholder:text-sm md:placeholder:text-base"
             />
